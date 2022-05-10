@@ -9,10 +9,15 @@
         Title="CLEVI-File Name Converter" Height="355" Width="500">
     <Grid>
         <Grid Margin="0,0,0,123" Background="#FFE6E4E4">
-            <Label Content="현재 파일 수" FontSize="20" HorizontalAlignment="Left" Height="42" Margin="35,27,0,0" VerticalAlignment="Top" Width="130"/>
-            <TextBox x:Name="tbxConut"  HorizontalAlignment="Left" Height="42" Margin="178,27,0,0" FontSize="15" IsReadOnly="True"
+            <StackPanel Background="#FFE6E4E4" Orientation="Horizontal" Height="26" VerticalAlignment="Top" Margin="0,0,2,0" HorizontalAlignment="Right" Width="258">
+                <Button Width="80" Margin="0 0 10 0" Content="폴더 설정" Background="#FFF3B58A"></Button>
+                <Button Width="80" Margin="0 0 10 0" Content="제목 설정" Background="#FFF3B58A"></Button>
+                <Button Width="80" Margin="0 0 0 0" Content="파일 설정" Background="#FFF3B58A"></Button>
+            </StackPanel>
+            <Label Content="현재 파일 수" FontSize="20" HorizontalAlignment="Left" Height="42" Margin="35,48,0,0" VerticalAlignment="Top" Width="130"/>
+            <TextBox x:Name="tbxConut"  HorizontalAlignment="Left" Height="42" Margin="178,48,0,0" FontSize="15" IsReadOnly="True"
                  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="152"/>
-            <Button x:Name="btnOpen" Content="불러오기" HorizontalAlignment="Left" Height="42" Margin="364,27,0,0" VerticalAlignment="Top" Width="86" Click="btnOpen_Click"/>
+            <Button x:Name="btnOpen" Content="불러오기" HorizontalAlignment="Left" Height="42" Margin="365,49,0,0" VerticalAlignment="Top" Width="86" Click="btnOpen_Click"/>
             <TextBox x:Name="tbxFolderPath" HorizontalAlignment="Left" Height="38" Margin="35,106,0,0" FontSize="15"
             TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="295"/>
             <Button x:Name="btnFindDirectory" Content="폴더 생성 위치" HorizontalAlignment="Left" Height="38" Margin="365,106,0,0" VerticalAlignment="Top" Width="85" Click="btnFindDirectory_Click"/>

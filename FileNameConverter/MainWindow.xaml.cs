@@ -63,7 +63,7 @@ namespace FileNameConverter
             startnum = int.Parse(tbxInputNum.Text);
             foreach (string filename in nameList)
             {
-                if (startnum >= 1 & startnum < 10)
+                if (startnum >= 1 & startnum < 9)
                 {
                     string fmt = "00.##";
                     FileSystem.RenameFile(filename, startnum.ToString(fmt) + startstring);
