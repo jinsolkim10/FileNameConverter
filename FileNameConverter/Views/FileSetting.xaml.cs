@@ -1,8 +1,8 @@
 ﻿using FileNameConverter.Model;
+using FileNameConverter.ViewModels;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +20,16 @@ using System.Windows.Threading;
 namespace FileNameConverter.Views
 {
     /// <summary>
-    /// TitleSetting.xaml에 대한 상호 작용 논리
+    /// FileSetting.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class TitleSetting : Page
+    public partial class FileSetting : Page
     {
-        public TitleSetting()
+        public FileSetting()
         {
             InitializeComponent();
         }
+
         List<string> nameList = new List<string>();
-        List<string> titleList = new List<string>();
         DispatcherTimer timer = new DispatcherTimer();
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
@@ -41,7 +41,7 @@ namespace FileNameConverter.Views
             if (dlg.ShowDialog() == true)
             {
                 foreach (string filename in dlg.FileNames)
-                {            
+                {
                     data.count++;
                     nameList.Add(filename);
                 }
@@ -51,33 +51,47 @@ namespace FileNameConverter.Views
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
-            if(nameList.Count == 0)
+            Data data = new Data();
+            data.startString = tbxInputStr.Text;
+            data.startNum = int.Parse(tbxInputNum.Text);
+            if (tbxInputNum.Text == null)
             {
-                MessageBox.Show("파일을 불러와주세요");
+                MessageBox.Show("생성할 파일의 번호를 입력해주세요");
             }
-            if(cbxCheck.IsChecked == true)
+            if (cbxCheck.IsChecked == true)
             {
                 foreach (string filename in nameList)
                 {
-                    var file = TagLib.File.Create(filename);
-                    string name = System.IO.Path.GetFileNameWithoutExtension(filename);
-                    file.Tag.Title = name;
-                    file.Save();
+                    if (data.startNum > 0 & data.startNum < 10)
+                    {
+                        string fmt = "00.##";
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
+                    }
+                    else if (data.startNum >= 10 & data.startNum < 100)
+                    {
+                        string fmt = "000.##";
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
+                    }
+                    else
+                    {
+                        string fmt = "0000.##";
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
+                    }
+                    data.startNum++;
                 }
+                nameList.Clear();
             }
             else
             {
                 foreach (string filename in nameList)
-                {              
-                    var file = TagLib.File.Create(filename);
-                    file.Tag.Title = tbxInputStr.Text;
-                    file.Save();
+                {
+                    FileSystem.RenameFile(filename, data.startNum.ToString() + data.startString);
+                    data.startNum++;
                 }
+                nameList.Clear();
             }
-            nameList.Clear();
             lblStateChange();
         }
-
 
         private void lblStateChange()
         {
@@ -95,9 +109,5 @@ namespace FileNameConverter.Views
 
 
 
-
     }
-
-
-
 }

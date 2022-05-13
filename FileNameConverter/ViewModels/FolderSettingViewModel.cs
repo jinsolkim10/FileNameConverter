@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileNameConverter.ViewModels
 {
-    public class FileSettingViewModel
+    public class FolderSettingViewModel
     {
     }
 }
