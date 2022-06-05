@@ -5,10 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileNameConverter.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="300" d:DesignWidth="500"
       Title="FolderSetting">
 
-    <Grid>
-        
+    <Grid Background="#FFF9DDDD">
+        <TextBox x:Name="tbxFolderPath" HorizontalAlignment="Left" Height="32" Margin="50,30,0,0" FontSize="15"
+            TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="295" Padding="6"/>
+        <Button x:Name="btnOpen" Content=". . ." HorizontalAlignment="Left" Height="32" Margin="379,30,0,0" VerticalAlignment="Top" 
+                Background="#FF676767" Width="86" Foreground="White" FontFamily="Arial Black" Click="btnOpen_Click" />
+        <Label Content="폴더 생성 수" FontSize="15" HorizontalAlignment="Left" Margin="271,131,0,0" VerticalAlignment="Top" Width="96" FontFamily="Arial Black" Height="28"/>
+        <TextBox x:Name="tbxInputFolderAmount" Margin="380,126,0,0" FontSize="15"
+                 TextWrapping="Wrap" Text="" TextChanged="tbxInputFolderAmount_TextChanged" HorizontalAlignment="Left" 
+                 Padding="6" Width="85" Height="40" VerticalAlignment="Top"/>
+        <Label Content="시작할 번호" FontSize="15" HorizontalAlignment="Left" Height="35" Margin="37,131,0,0" VerticalAlignment="Top" Width="90" FontFamily="Arial Black"/>
+        <TextBox x:Name="tbxInputNum" HorizontalAlignment="Left" Height="40" Margin="132,126,0,0" FontSize="15" 
+                 TextWrapping="Wrap" Text="" Padding="6" VerticalAlignment="Top" Width="118" TextChanged="tbxInputNum_TextChanged"/>
+
+        <Label Content="추가할 이름" FontSize="15" HorizontalAlignment="Left" Height="34" Margin="37,195,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.507,0.715" FontFamily="Arial Black"/>
+        <TextBox x:Name="tbxInputStr" HorizontalAlignment="Left" Height="40" Margin="132,189,0,0" FontSize="15" Padding="6"
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="118"/>
+        <Label Content="파일 이름 앞에 0 추가하기" FontSize="10" HorizontalAlignment="Left" Height="20" Margin="230,248,0,0" VerticalAlignment="Top" Width="141" FontFamily="Arial Black"/>
+        <CheckBox x:Name="cbxCheck" Content="CheckBox" HorizontalAlignment="Left" Height="19" Margin="362,251,0,0" VerticalAlignment="Top" Width="16"/>
+        <Button x:Name="btnFolderCreate" Content="생성" HorizontalAlignment="Left" Margin="400,222,0,0" VerticalAlignment="Top" 
+                Background="#FFC85E5E" Height="48" Width="65" Click="btnFolderCreate_Click" RenderTransformOrigin="1.022,-0.174" 
+                Padding="6" Foreground="#FFFDFDFD" FontFamily="Arial Black" FontWeight="Bold" FontSize="14"/>
+        <Label x:Name="lblState" Content="" FontSize="15" HorizontalAlignment="Center" Height="36" Margin="0,74,0,0" VerticalAlignment="Top" 
+               Width="172" RenderTransformOrigin="0.507,0.715" FontFamily="Arial Black" Foreground="#FF3E50E8"/>
     </Grid>
 </Page>

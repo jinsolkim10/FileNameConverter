@@ -1,7 +1,8 @@
 ﻿using FileNameConverter.Model;
+using FileNameConverter.ViewModels;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,96 +20,77 @@ using System.Windows.Threading;
 namespace FileNameConverter.Views
 {
     /// <summary>
-    /// FolderSetting.xaml에 대한 상호 작용 논리
+    /// FileSetting.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class FolderSetting : Page
+    public partial class FileSetting : Page
     {
-        public FolderSetting()
+        public FileSetting()
         {
             InitializeComponent();
         }
 
-        List<string> folderNameList = new List<string>();
+        List<string> nameList = new List<string>();
         DispatcherTimer timer = new DispatcherTimer();
-
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
+            Data data = new Data();
+            tbxConut.Text = "";
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = true;
+
+            if (dlg.ShowDialog() == true)
             {
-                tbxFolderPath.Text = dlg.SelectedPath;
+                foreach (string filename in dlg.FileNames)
+                {
+                    data.count++;
+                    nameList.Add(filename);
+                }
+                tbxConut.Text = data.count.ToString() + " 개의 파일이 발견되었습니다";
             }
         }
-        private void btnFolderCreate_Click(object sender, RoutedEventArgs e)
-        {
-            CreateFolderList();
-            CreateFolder();
-        }
 
-        private void tbxInputFolderAmount_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Data data = new Data();
-            data.checkNum(tbxInputFolderAmount.Text);
-        }
-
-        private void tbxInputNum_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Data data = new Data();
-            data.checkNum(tbxInputNum.Text);
-        }
-
-        private void CreateFolderList()
+        private void btnChange_Click(object sender, RoutedEventArgs e)
         {
             Data data = new Data();
             data.startString = tbxInputStr.Text;
             data.startNum = int.Parse(tbxInputNum.Text);
-            folderNameList = new List<string>();
-            if (tbxInputFolderAmount.Text == null)
+            if (tbxInputNum.Text == null)
             {
-                System.Windows.MessageBox.Show("생성할 폴더의 수를 입력해주세요");
+                MessageBox.Show("생성할 파일의 번호를 입력해주세요");
             }
             if (cbxCheck.IsChecked == true)
             {
-                for (int i = 1; i <= int.Parse(tbxInputFolderAmount.Text); i++)
+                foreach (string filename in nameList)
                 {
                     if (data.startNum > 0 & data.startNum < 10)
                     {
                         string fmt = "00.##";
-                        folderNameList.Add(data.startNum.ToString(fmt) + data.startString);
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
                     }
                     else if (data.startNum >= 10 & data.startNum < 100)
                     {
                         string fmt = "000.##";
-                        folderNameList.Add(data.startNum.ToString(fmt) + data.startString);
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
                     }
                     else
                     {
                         string fmt = "0000.##";
-                        folderNameList.Add(data.startNum.ToString(fmt)+data.startString);
+                        FileSystem.RenameFile(filename, data.startNum.ToString(fmt) + data.startString);
                     }
                     data.startNum++;
                 }
+                nameList.Clear();
             }
             else
             {
-                for (int i = 1; i <= int.Parse(tbxInputFolderAmount.Text); i++)
+                foreach (string filename in nameList)
                 {
-                    folderNameList.Add(data.startNum.ToString() + data.startString);
+                    FileSystem.RenameFile(filename, data.startNum.ToString() + data.startString);
                     data.startNum++;
                 }
+                nameList.Clear();
             }
             lblStateChange();
-            //data.startNum = 1;
-        }
-
-        private void CreateFolder()
-        {
-            foreach (string foldeName in folderNameList)
-            {
-                string path1 = tbxFolderPath.Text;
-                string path2 = System.IO.Path.Combine(path1, foldeName);
-                Directory.CreateDirectory(path2);
-            }
         }
 
         private void lblStateChange()
@@ -125,5 +106,8 @@ namespace FileNameConverter.Views
             lblState.Content = "";
             timer.Stop();
         }
+
+
+
     }
 }
