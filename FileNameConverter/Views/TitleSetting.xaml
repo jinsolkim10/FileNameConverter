@@ -8,18 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="500"
       Title="TitleSetting">
 
-    <Grid Background="#FFF9DDDD">
-        <TextBox x:Name="tbxConut"  HorizontalAlignment="Left" Height="32" Margin="50,30,0,0" FontSize="15" IsReadOnly="True"
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="296" Padding="6"/>
-        <Button x:Name="btnOpen" Content=". . ." HorizontalAlignment="Left" Height="32" Margin="379,30,0,0" VerticalAlignment="Top" 
-                Background="#FF676767" Width="86" Foreground="White" FontFamily="Arial Black" Click="btnOpen_Click"/>
-        <TextBox x:Name="tbxInputStr" HorizontalAlignment="Left" Height="37" Margin="150,89,0,0" FontSize="15"
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" Padding="6"/>
-
-        <Button x:Name="btnChange" Content="변경하기" HorizontalAlignment="Left" Height="48" Margin="400,222,0,0" VerticalAlignment="Top" 
-                Background="#FFC85E5E" Width="65" Click="btnChange_Click" Foreground="White" FontFamily="Arial Black"/>
-        <Label Content="변경할 제목" FontSize="15" HorizontalAlignment="Left" Height="31" Margin="50,95,0,0" VerticalAlignment="Top" Width="107" FontFamily="Arial Black"/>
-        <Label Content="파일 이름으로 변경" FontSize="10" HorizontalAlignment="Left" Height="20" Margin="241,244,0,0" VerticalAlignment="Top" Width="108" FontFamily="Arial Black"/>
-        <CheckBox x:Name="cbxCheck" Content="CheckBox" HorizontalAlignment="Left" Height="20" Margin="339,246,0,0" VerticalAlignment="Top" Width="16"/>
+    <Grid>
+        
     </Grid>
 </Page>
